@@ -1,0 +1,26 @@
+{
+  "name": "zumba/aura-extension",
+  "description": "Some helpers for DB usage",
+  "type": "library",
+  "authors": [
+    {
+      "name": "zumba",
+      "email": "zumba@iki.fi"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Zumba\\": "src/"
+    },
+    "require": {}
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/gzumba/Aura.Sql"
+    }
+  ],
+  "require": {
+    "aura/sql": "dev-2.x-php8-combat"
+  }
+}
