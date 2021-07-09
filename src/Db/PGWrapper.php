@@ -82,4 +82,9 @@ class PGWrapper implements LoggerAwareInterface
     {
         return pg_fetch_all_columns($resource, $column);
     }
+
+    public function close($resource = null): void
+    {
+        pg_close($resource);
+    }
 }
