@@ -3,12 +3,22 @@
 namespace Zumba\Aura;
 
 use Aura\Sql\Profiler;
+use Symfony\Component\Stopwatch\Stopwatch;
 use Zumba\Log\LoggingI;
 use Zumba\Log\LoggingTrait;
 
 class LoggingProfiler extends Profiler implements LoggingI
 {
     use LoggingTrait;
+
+    private ?Stopwatch $stopwatch;
+    private bool $isPrepared = false;
+    private int $cnt = 1;
+
+    public function __construct(?Stopwatch $stopwatch = null)
+    {
+        $this->stopwatch = $stopwatch;
+    }
 
     public function addProfile(
         $duration,
@@ -18,6 +28,8 @@ class LoggingProfiler extends Profiler implements LoggingI
     ) {
 
         parent::addProfile($duration, $function, $statement, $bind_values);
+
+        $this->addStopwatchEntry($function);
 
         if ($function === 'prepare') {
             return null;
@@ -29,5 +41,23 @@ class LoggingProfiler extends Profiler implements LoggingI
         );
 
         return null;
+    }
+
+    private function addStopwatchEntry(string $function)
+    {
+        if (null !== $this->stopwatch) {
+
+            $watch = sprintf("AuraSQL #%d", $this->cnt);
+
+            if ($function === 'prepare') {
+                $this->isPrepared = true;
+                $this->stopwatch->start($watch, 'Aura');
+
+            } elseif ($this->isPrepared) {
+                $this->isPrepared = false;
+                $this->stopwatch->stop($watch);
+                $this->cnt++;
+            }
+        }
     }
 }
