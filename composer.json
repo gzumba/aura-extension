@@ -21,6 +21,7 @@
     }
   ],
   "require": {
-    "aura/sql": "dev-2.x-php8-combat"
+    "aura/sql": "dev-2.x-php8-combat",
+    "aura/sqlquery": "^2.7"
   }
 }
