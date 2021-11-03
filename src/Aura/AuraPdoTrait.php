@@ -6,12 +6,8 @@ use Aura\SqlQuery\QueryFactory;
 
 trait AuraPdoTrait
 {
-    /**
-     * @var ExtendedPdo
-     */
-    protected $pdo;
-    /** @var  QueryFactory */
-    protected $queryFactory;
+    protected ?ExtendedPdo $pdo;
+    protected QueryFactory $queryFactory;
 
     /**
      * @return ExtendedPdo
@@ -26,7 +22,7 @@ trait AuraPdoTrait
         $this->pdo = $pdo;
     }
 
-    protected function initAuraPdo(ExtendedPdo $pdo, QueryFactory $queryFactory = null)
+    protected function initAuraPdo(?ExtendedPdo $pdo = null, QueryFactory $queryFactory = null)
     {
         $this->pdo = $pdo;
 

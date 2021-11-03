@@ -10,6 +10,15 @@ class ConnectionFactory
     /** @var array|ExtendedPdoWithExceptions[] */
     private array $connections = [];
 
+	public static function createFromIniFile(?string $ini_file = null): ConnectionFactory
+	{
+		$ini_file ??= sprintf("%s/.pg_service.conf", getenv('HOME'));
+
+		$ini = parse_ini_file($ini_file, true);
+
+		return self::createFromServiceConfig($ini);
+	}
+
     public static function createFromServiceConfig(array $ini): ConnectionFactory
     {
         $cf = new self();
