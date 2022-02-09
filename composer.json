@@ -22,7 +22,11 @@
   ],
   "require": {
     "php": "^7.4",
+    "ext-pdo": "*",
     "aura/sql": "2.x",
     "aura/sqlquery": "^2.7"
+  },
+  "require-dev": {
+    "symfony/http-foundation": "5.*|6.*"
   }
 }

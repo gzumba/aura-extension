@@ -34,6 +34,9 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
         $this->password = $password;
     }
 
+    /**
+     * @return \PDOStatement
+     */
     public function perform($statement, array $values = [])
     {
         try {
