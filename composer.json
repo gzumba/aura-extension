@@ -2,6 +2,7 @@
   "name": "zumba/aura-extension",
   "description": "Some helpers for DB usage",
   "type": "library",
+  "license": "proprietary",
   "authors": [
     {
       "name": "zumba",
