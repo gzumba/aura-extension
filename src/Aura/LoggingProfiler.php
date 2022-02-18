@@ -1,16 +1,13 @@
 <?php
-
+declare(strict_types=1);
 namespace Zumba\Aura;
 
-use Aura\Sql\Profiler;
+use Aura\Sql\Profiler\Profiler;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Zumba\Log\LoggingI;
-use Zumba\Log\LoggingTrait;
 
-class LoggingProfiler extends Profiler implements LoggingI
+class LoggingProfiler extends Profiler
 {
-    use LoggingTrait;
-
     private ?Stopwatch $stopwatch;
     private bool $isPrepared = false;
     private int $cnt = 1;
@@ -59,5 +56,10 @@ class LoggingProfiler extends Profiler implements LoggingI
                 $this->cnt++;
             }
         }
+    }
+
+    public function setLogger($logger): void
+    {
+        $this->logger = $logger;
     }
 }

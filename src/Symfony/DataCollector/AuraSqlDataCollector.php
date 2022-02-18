@@ -2,7 +2,7 @@
 
 namespace Zumba\Symfony\DataCollector;
 
-use Aura\Sql\Profiler;
+use Aura\Sql\Profiler\Profiler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
