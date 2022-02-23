@@ -4,14 +4,14 @@ namespace Zumba\Aura;
 
 use Aura\Sql\ExtendedPdo;
 use Aura\Sql\Parser\ParserInterface;
-use Aura\Sql\ProfilerInterface;
+use Aura\Sql\Profiler\ProfilerInterface;
 use Zumba\Aura\Parser\PgsqlParser;
 use Zumba\Db\Exception\DBException;
 
 class ExtendedPdoWithExceptions extends ExtendedPdo
 {
     public function __construct(
-        $dsn,
+        string $dsn,
         $username = null,
         $password = null,
         array $options = [],
@@ -20,10 +20,16 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
     ) {
         $options[\PDO::ATTR_PERSISTENT] = true;
 
-        parent::__construct($dsn, $username, $password, $options, $attributes);
-        if ($profiler) {
-            $this->setProfiler($profiler);
-        }
+        parent::__construct($dsn, $username, $password, $options, $attributes, $profiler);
+    }
+
+    public static function fromPdo(\PDO $pdo): self
+    {
+        $p = new self('');
+
+        $p->pdo  = $pdo;
+
+        return $p;
     }
 
     protected function newParser(string $driver): ParserInterface
