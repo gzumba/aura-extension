@@ -29,6 +29,7 @@
   },
   "require-dev": {
     "symfony/http-foundation": "5.*|6.*",
+    "symfony/http-kernel": "5.*|6.*",
     "symfony/phpunit-bridge": "6.1.x-dev",
     "symfony/stopwatch": "5.4.x-dev"
   },

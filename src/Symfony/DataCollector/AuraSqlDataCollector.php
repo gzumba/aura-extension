@@ -2,16 +2,16 @@
 
 namespace Zumba\Symfony\DataCollector;
 
-use Aura\Sql\Profiler\Profiler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Zumba\Aura\SymfonyProfiler;
 
 class AuraSqlDataCollector extends DataCollector
 {
-    private Profiler $profiler;
+    private SymfonyProfiler $profiler;
 
-    public function __construct(Profiler $profiler)
+    public function __construct(SymfonyProfiler $profiler)
     {
         $this->profiler = $profiler;
     }

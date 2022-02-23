@@ -3,90 +3,96 @@ declare(strict_types=1);
 namespace Zumba\Aura;
 
 use Aura\Sql\Profiler\Profiler;
-use Aura\Sql\Profiler\ProfilerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class SymfonyProfiler extends Profiler
 {
     private ?Stopwatch $stopwatch;
-    private bool $isPrepared = false;
     private int $cnt = 1;
+    private string $watch;
+    private array $profiles = [];
 
     public function __construct(?Stopwatch $stopwatch = null, ?LoggerInterface $logger = null)
     {
         parent::__construct($logger);
         $this->stopwatch = $stopwatch;
+        $this->logFormat = "[{duration} ms][{function}] {stamenent}";
     }
+
+    /**
+     *
+     * Starts a profile entry.
+     *
+     * @param string $function The function starting the profile entry.
+     *
+     * @return void
+     */
+    public function start(string $function): void
+    {
+        $this->startStopwatch();
+        parent::start($function);
+    }
+
 
     public function finish(?string $statement = null, array $values = []): void
     {
-        parent::finish($statement, $values);
-//        $this->addStopwatchEntry()
+        $this->stopStopwatch();
+
+        $profile = $this->buildProfile($statement, $values);
+
+        $this->logEntry($profile);
+        $this->addProfile($profile);
     }
 
+    private function logEntry(array $profile): void
+    {
+        $this->logger->log($this->logLevel, $this->logFormat, $profile);
 
-//    public function addProfile(
-//        $duration,
-//        $function,
-//        $statement,
-//        array $bind_values = array()
-//    ) {
-//
-//        parent::addProfile($duration, $function, $statement, $bind_values);
-//
-//        $this->addStopwatchEntry($function);
-//
-//        if ($function === 'prepare') {
-//            return null;
-//        }
-//
-//        $this->logDebug(
-//            "[{duration} ms][{function}] {sql}",
-//            array_merge(['duration' => (int)(1000*$duration), 'function' => $function, 'sql' => $statement], $bind_values)
-//        );
-//
-//        return null;
-//    }
+        $this->context = [];
+    }
 
-    private function addStopwatchEntry(string $function)
+    private function startStopwatch(): void
     {
         if (null !== $this->stopwatch) {
+            $this->watch = sprintf("AuraSQL #%d", $this->cnt);
+            $this->stopwatch->start($this->watch, 'Aura');
+        }
+    }
 
-            $watch = sprintf("AuraSQL #%d", $this->cnt);
-
-            if ($function === 'prepare') {
-                $this->isPrepared = true;
-                $this->stopwatch->start($watch, 'Aura');
-
-            } elseif ($this->isPrepared) {
-                $this->isPrepared = false;
-                $this->stopwatch->stop($watch);
-                $this->cnt++;
-            }
+    private function stopStopwatch()
+    {
+        if (null !== $this->stopwatch) {
+            $this->stopwatch->stop($this->watch);
+            $this->cnt++;
         }
     }
 
     public function getProfiles(): array
     {
-        // FIXME: nope
-        return [];
+        return $this->profiles;
     }
 
     public function resetProfiles()
     {
-
+        $this->profiles = [];
     }
 
-
-    public function setActive(bool $active)
+    private function addProfile(array $profile)
     {
-        // TODO: Implement setActive() method.
+        $this->profiles[] = $profile;
     }
 
-    public function isActive(): bool
+    private function buildProfile(?string $statement, array $values): array
     {
-        // TODO: Implement isActive() method.
+        $finish = microtime(true);
+        $profile = [
+            'duration' => (int)(1000 * ($finish - $this->context['start'])),
+            'function' => $this->context['function'],
+            'statement' => $statement,
+            'bind_values' => $values,
+        ];
+        return $profile;
     }
 
 }
