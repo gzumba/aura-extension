@@ -17,7 +17,7 @@ class SymfonyProfiler extends Profiler
     {
         parent::__construct($logger);
         $this->stopwatch = $stopwatch;
-        $this->logFormat = "[{duration} ms][{function}] {stamenent}";
+        $this->logFormat = "[{duration} ms][{function}] {statement}";
     }
 
     /**
