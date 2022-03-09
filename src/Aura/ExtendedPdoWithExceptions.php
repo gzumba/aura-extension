@@ -79,6 +79,11 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
         return parent::fetchAll((string) $statement, $values);
     }
 
+    public function fetchAssoc($statement, array $values = []): array
+    {
+        return parent::fetchAssoc((string) $statement, $values);
+    }
+
     public function yieldAll($statement, array $values = []): \Generator
     {
         return parent::yieldAll((string) $statement, $values);
