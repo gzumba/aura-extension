@@ -22,7 +22,7 @@
     }
   ],
   "require": {
-    "php": "^7.4",
+    "php": "^8.0",
     "ext-pdo": "*",
     "aura/sql": "4.x",
     "aura/sqlquery": "^2.7|dev-stat-analysis-fixes",
