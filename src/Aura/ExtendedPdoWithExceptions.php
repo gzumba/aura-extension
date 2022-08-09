@@ -89,5 +89,17 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
         return parent::yieldAll((string) $statement, $values);
     }
 
+    /**
+     * @TODO Extract a method, use PgFormatter etc..
+     */
+    protected function bindValue(\PDOStatement $sth, $key, $val): bool
+    {
+        if ($val instanceof \DateTimeInterface) {
+            return $sth->bindValue($key, $val->format('Y-m-d H:i:s'));
+        }
+
+        return parent::bindValue($sth, $key, $val);
+    }
+
 
 }
