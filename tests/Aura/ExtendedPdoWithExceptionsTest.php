@@ -24,4 +24,11 @@ class ExtendedPdoWithExceptionsTest extends TestCase
         $this->pdo->perform('SELECT 1');
     }
 
+    public function testFromPdoWorks(): void
+    {
+        $inner_pdo = new \PDO('pgsql:dbname=test');
+
+        $pdo = ExtendedPdoWithExceptions::fromPdo($inner_pdo);
+        self::assertSame($inner_pdo, $pdo->getPdo());
+    }
 }
