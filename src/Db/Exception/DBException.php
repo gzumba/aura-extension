@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Zumba\Db\Exception;
 
 use Throwable;
@@ -49,6 +49,11 @@ class DBException extends \RuntimeException
         $this->query_string = $query_string;
 
         return $this;
+    }
+
+    public function getQueryString(): ?string
+    {
+        return $this->query_string;
     }
 
 }
