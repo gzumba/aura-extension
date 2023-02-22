@@ -37,7 +37,7 @@ class DBException extends \RuntimeException
         }
 
         // NOTE: We check for '08' and '8' as the codes starting with '08' are a bit annoying to handle as ints
-        if (u($pdoException->getCode())->startsWith(['57', '08', '8'])) {
+        if (u((string)$pdoException->getCode())->startsWith(['57', '08', '8'])) {
             return new DbConnectionFailure($pdoException->getMessage(), $pdoException->getCode(), $pdoException);
         }
 
