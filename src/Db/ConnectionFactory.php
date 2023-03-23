@@ -59,6 +59,12 @@ class ConnectionFactory
             $config['dbname'] ?? ''
         );
 
+        foreach (['sslmode', 'sslcert', 'sslkey', 'sslrootcert'] as $key) {
+            if ($config[$key] ?? false) {
+                $dsn .= sprintf(";%s=%s", $key, $config[$key]);
+            }
+        }
+
         $options = [
             \PDO::ATTR_PERSISTENT => true,
         ];
