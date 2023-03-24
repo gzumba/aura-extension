@@ -25,7 +25,7 @@
     "php": "^8.0",
     "ext-pdo": "*",
     "aura/sql": "4.x",
-    "aura/sqlquery": "^2.7|dev-stat-analysis-fixes",
+    "aura/sqlquery": "^2.7|dev-2.x-zumba",
     "symfony/string": ">=5.4"
   },
   "require-dev": {
