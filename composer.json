@@ -26,7 +26,8 @@
     "ext-pdo": "*",
     "aura/sql": "4.x",
     "aura/sqlquery": "^2.7|dev-2.x-zumba",
-    "symfony/string": ">=5.4"
+    "symfony/string": ">=5.4",
+    "thecodingmachine/safe": "^1.0|^2.0"
   },
   "require-dev": {
     "symfony/http-foundation": "5.*|6.*",
