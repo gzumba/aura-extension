@@ -22,9 +22,9 @@
     }
   ],
   "require": {
-    "php": "^7.4",
+    "php": "^8.2",
     "ext-pdo": "*",
-    "aura/sql": "2.x",
+    "aura/sql": "5.x",
     "aura/sqlquery": "^2.7"
   },
   "require-dev": {
