@@ -3,7 +3,8 @@ declare(strict_types=1);
 namespace Zumba\Aura;
 
 use Aura\Sql\ExtendedPdo;
-use Aura\Sql\ProfilerInterface;
+
+use Aura\Sql\Profiler\ProfilerInterface;
 use Zumba\Db\Exception\DBException;
 
 class ExtendedPdoWithExceptions extends ExtendedPdo
@@ -37,7 +38,7 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
     /**
      * @return \PDOStatement
      */
-    public function perform($statement, array $values = [])
+    public function perform(string $statement, array $values = []): \PDOStatement
     {
         try {
             return parent::perform($statement, $values);
