@@ -25,7 +25,8 @@
     "php": "^8.2",
     "ext-pdo": "*",
     "aura/sql": "5.x",
-    "aura/sqlquery": "^2.7"
+    "aura/sqlquery": "^2.7",
+    "thecodingmachine/safe": "^2.4"
   },
   "require-dev": {
     "symfony/http-foundation": "5.*|6.*"
