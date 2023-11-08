@@ -13,7 +13,7 @@ class SymfonyProfiler extends Profiler
     private string $watch;
     private array $profiles = [];
 
-    public function __construct(?Stopwatch $stopwatch = null, ?LoggerInterface $logger = null)
+    public function __construct(?Stopwatch $stopwatch, ?LoggerInterface $logger = null)
     {
         parent::__construct($logger);
         $this->stopwatch = $stopwatch;
