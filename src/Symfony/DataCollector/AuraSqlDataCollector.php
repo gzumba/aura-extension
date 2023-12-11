@@ -16,7 +16,7 @@ class AuraSqlDataCollector extends DataCollector
         $this->profiler = $profiler;
     }
 
-    public function collect(Request $request, Response $response, \Throwable $throwable = null)
+    public function collect(Request $request, Response $response, \Throwable $throwable = null): void
     {
         $this->data['profiles'] = $this->profiler->getProfiles();
         $cnt = 0;
@@ -59,7 +59,7 @@ class AuraSqlDataCollector extends DataCollector
     }
 
 
-    public function reset()
+    public function reset(): void
     {
         $this->data = [];
         $this->profiler->resetProfiles();
