@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Zumba\Db;
 
 use Zumba\Aura\ExtendedPdoWithExceptions;
@@ -10,14 +12,22 @@ class ConnectionFactory
     /** @var array|ExtendedPdoWithExceptions[] */
     private array $connections = [];
 
-	public static function createFromIniFile(?string $ini_file = null): ConnectionFactory
-	{
-		$ini_file ??= sprintf("%s/.pg_service.conf", getenv('HOME'));
+    public static function createFromIniFile(?string $ini_file = null): ConnectionFactory
+    {
+        $ini_file ??= sprintf("%s/.pg_service.conf", getenv('HOME'));
 
-		$ini = parse_ini_file($ini_file, true);
+        if (!is_readable($ini_file)) {
+            throw new \InvalidArgumentException("Ini file '{$ini_file}' could not be read");
+        }
 
-		return self::createFromServiceConfig($ini);
-	}
+        $ini = parse_ini_file($ini_file, true, INI_SCANNER_RAW);
+
+        if (!$ini) {
+            throw new \InvalidArgumentException("Failed parsing ini file '{$ini_file}'");
+        }
+
+        return self::createFromServiceConfig($ini);
+    }
 
     public static function createFromServiceConfig(array $ini): ConnectionFactory
     {
@@ -32,7 +42,8 @@ class ConnectionFactory
     public function getPdoFor(string $site): ExtendedPdoWithExceptions
     {
         if (!array_key_exists($site, $this->configs)) {
-            throw new \DomainException("Site {$site} does not exist, available sites: " . implode(', ', array_keys($this->configs)));
+            throw new \DomainException("Site {$site} does not exist, available sites: " . implode(', ',
+                    array_keys($this->configs)));
         }
 
         return $this->connections[$site] ??=
