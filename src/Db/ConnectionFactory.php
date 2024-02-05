@@ -19,7 +19,7 @@ class ConnectionFactory
             throw new \InvalidArgumentException("Ini file '{$ini_file}' could not be read");
         }
 
-        $ini = parse_ini_file($ini_file, true);
+        $ini = parse_ini_file($ini_file, true, INI_SCANNER_RAW);
 
         if (!$ini) {
             throw new \InvalidArgumentException("Failed parsing ini file '{$ini_file}'");
