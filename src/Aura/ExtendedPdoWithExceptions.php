@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Zumba\Aura;
 
 use Aura\Sql\ExtendedPdo;
@@ -18,7 +20,9 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
         array $attributes = [],
         ProfilerInterface $profiler = null
     ) {
-        $options[\PDO::ATTR_PERSISTENT] = true;
+        if (!array_key_exists(\PDO::ATTR_PERSISTENT, $options)) {
+            $options[\PDO::ATTR_PERSISTENT] = true;
+        }
 
         parent::__construct($dsn, $username, $password, $options, $attributes, $profiler);
     }
@@ -27,7 +31,7 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
     {
         $p = new self('');
 
-        $p->pdo  = $pdo;
+        $p->pdo = $pdo;
 
         return $p;
     }
@@ -48,7 +52,7 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
             return parent::perform((string) $statement, $values);
         } catch (\PDOException $e) {
             $db_exception = DBException::createFromPdoException($e);
-            $db_exception->setQueryString((string)$statement);
+            $db_exception->setQueryString((string) $statement);
             throw $db_exception;
         }
     }
