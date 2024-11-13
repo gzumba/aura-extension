@@ -3,6 +3,7 @@
   "description": "Some helpers for DB usage",
   "type": "library",
   "license": "proprietary",
+  "minimum-stability": "dev",
   "authors": [
     {
       "name": "zumba",
@@ -22,13 +23,15 @@
     }
   ],
   "require": {
-    "php": "^8.2",
+    "php": "^8.2,<8.4",
     "ext-pdo": "*",
     "aura/sql": "5.x",
     "aura/sqlquery": "^2.7|dev-2.x-zumba",
+    "symfony/string": "*",
     "thecodingmachine/safe": "^2.4"
   },
   "require-dev": {
+    "phpunit/phpunit": "*",
     "symfony/http-foundation": "5.*|6.*"
   }
 }
