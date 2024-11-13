@@ -17,7 +17,7 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
         array $attributes = [],
         ProfilerInterface $profiler = null
     ) {
-        $options[\PDO::ATTR_PERSISTENT] = true;
+//        $options[\PDO::ATTR_PERSISTENT] = true;
 
         parent::__construct($dsn, $username, $password, $options, $attributes);
         if ($profiler) {

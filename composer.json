@@ -24,11 +24,13 @@
   "require": {
     "php": "^8.2",
     "ext-pdo": "*",
-    "aura/sql": "5.x",
+    "aura/sql": "dev-php84",
     "aura/sqlquery": "^2.7|dev-2.x-zumba",
+    "symfony/string": "*",
     "thecodingmachine/safe": "^2.4"
   },
   "require-dev": {
+    "phpunit/phpunit": "*",
     "symfony/http-foundation": "5.*|6.*"
   }
 }
