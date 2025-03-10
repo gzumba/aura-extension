@@ -28,10 +28,10 @@
     "aura/sql": "5.x",
     "aura/sqlquery": "^2.7|dev-2.x-zumba",
     "symfony/string": "*",
-    "thecodingmachine/safe": "^2.4"
+    "thecodingmachine/safe": "^2.4|^3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
-    "symfony/http-foundation": "5.*|6.*"
+    "symfony/http-foundation": "5.*|6.*|7.*"
   }
 }
