@@ -27,7 +27,7 @@
     "aura/sql": "dev-php84",
     "aura/sqlquery": "^2.7|dev-2.x-zumba",
     "symfony/string": "*",
-    "thecodingmachine/safe": "^2.4"
+    "thecodingmachine/safe": "^3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
