@@ -52,17 +52,26 @@ class ConnectionFactory
 
     private function buildConnection(array $config): ExtendedPdoWithExceptions
     {
+        $host = $config['host'] ?? $config['hostaddr'] ?? '';
+
         $dsn = sprintf(
             "pgsql:host=%s;port=%s;dbname=%s",
-            $config['host'],
+            $host,
             $config['port'] ?? '5432',
-            $config['dbname']
+            $config['dbname'] ?? ''
         );
+
+        foreach (['sslmode', 'sslcert', 'sslkey', 'sslrootcert'] as $key) {
+            if ($config[$key] ?? false) {
+                $dsn .= sprintf(";%s=%s", $key, $config[$key]);
+            }
+        }
+
 
         $options = [
             \PDO::ATTR_PERSISTENT => true,
         ];
 
-        return new ExtendedPdoWithExceptions($dsn, $config['user'], $config['password'], $options, []);
+        return new ExtendedPdoWithExceptions($dsn, $config['user'] ?? '', $config['password'] ?? '', $options, []);
     }
 }
