@@ -7,14 +7,10 @@ use function Symfony\Component\String\u;
 
 class DBException extends \RuntimeException
 {
-
-    /**
-     * @var int|string
-     */
-    private $original_code;
+    private int|string $original_code;
     protected ?string $query_string;
 
-    public function __construct($message = "", $code = 0, Throwable $previous = null)
+    public function __construct($message = "", $code = 0, ?Throwable $previous = null)
     {
         parent::__construct($message, (int)$code, $previous);
         $this->original_code = $code;

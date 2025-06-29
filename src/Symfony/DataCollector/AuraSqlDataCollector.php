@@ -2,21 +2,21 @@
 
 namespace Zumba\Symfony\DataCollector;
 
-use Aura\Sql\Profiler\Profiler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Zumba\Aura\SymfonyProfiler;
 
 class AuraSqlDataCollector extends DataCollector
 {
-    private Profiler $profiler;
+    private SymfonyProfiler $profiler;
 
-    public function __construct(Profiler $profiler)
+    public function __construct(SymfonyProfiler $profiler)
     {
         $this->profiler = $profiler;
     }
 
-    public function collect(Request $request, Response $response, \Throwable $throwable = null): void
+    public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
     {
         $this->data['profiles'] = $this->profiler->getProfiles();
         $cnt = 0;
@@ -65,4 +65,3 @@ class AuraSqlDataCollector extends DataCollector
         $this->profiler->resetProfiles();
     }
 }
-

@@ -10,12 +10,12 @@ use Zumba\Db\Exception\DBException;
 class ExtendedPdoWithExceptions extends ExtendedPdo
 {
     public function __construct(
-        $dsn,
-        $username = null,
-        $password = null,
+        string $dsn,
+        ?string $username = null,
+        ?string $password = null,
         array $options = [],
         array $attributes = [],
-        ProfilerInterface $profiler = null
+        ?ProfilerInterface $profiler = null
     ) {
 //        $options[\PDO::ATTR_PERSISTENT] = true;
 

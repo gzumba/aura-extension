@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace Zumba\Aura;
 
 use Aura\Sql\ExtendedPdo;
-use Aura\Sql\ProfilerInterface;
+use Aura\Sql\Profiler\ProfilerInterface;
 
 class PdoFactory
 {
@@ -15,7 +15,7 @@ class PdoFactory
     private string $username;
     private string $password;
 
-    public function __construct(string $db_host, string $db_port, string $db_name, ProfilerInterface $profiler = null)
+    public function __construct(string $db_host, string $db_port, string $db_name, ?ProfilerInterface $profiler = null)
     {
         $this->profiler = $profiler;
         $this->db_host = $db_host;
