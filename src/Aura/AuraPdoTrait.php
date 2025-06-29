@@ -15,9 +15,6 @@ trait AuraPdoTrait
     protected ?ExtendedPdo $pdo;
     protected QueryFactory $queryFactory;
 
-    /**
-     * @return ExtendedPdo
-     */
     public function getPdo(): ExtendedPdo
     {
         return $this->pdo;
@@ -28,7 +25,7 @@ trait AuraPdoTrait
         $this->pdo = $pdo;
     }
 
-    protected function initAuraPdo(?ExtendedPdo $pdo = null, QueryFactory $queryFactory = null): void
+    protected function initAuraPdo(?ExtendedPdo $pdo = null, ?QueryFactory $queryFactory = null): void
     {
         $this->pdo = $pdo;
 

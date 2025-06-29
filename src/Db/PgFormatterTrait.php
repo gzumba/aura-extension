@@ -9,7 +9,7 @@ trait PgFormatterTrait
         return '{' . implode(',', array_map(fn ($value) => $this->formatSql($value), $array)) . '}';
     }
 
-    protected static function formatDateTimeSqlValue(\DateTimeInterface $date_time = null): ?string
+    protected static function formatDateTimeSqlValue(?\DateTimeInterface $date_time = null): ?string
     {
         if (!$date_time) {
             return null;
