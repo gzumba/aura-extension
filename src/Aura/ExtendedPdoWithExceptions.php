@@ -60,7 +60,7 @@ class ExtendedPdoWithExceptions extends ExtendedPdo
     /**
      * @param string|\Stringable $statement
      */
-    public function fetchValue($statement, array $values = [])
+    public function fetchValue($statement, array $values = []): mixed
     {
         return parent::fetchValue((string) $statement, $values);
     }
