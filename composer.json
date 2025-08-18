@@ -24,7 +24,7 @@
   "require": {
     "php": "^8.0",
     "ext-pdo": "*",
-    "aura/sql": "4.x",
+    "aura/sql": "*",
     "aura/sqlquery": "^2.7|dev-2.x-zumba",
     "symfony/string": ">=5.4",
     "thecodingmachine/safe": "^1.0|^2.0"
