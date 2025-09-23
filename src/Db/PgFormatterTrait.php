@@ -18,6 +18,21 @@ trait PgFormatterTrait
         return $date_time->format('Y-m-d H:i:s');
     }
 
+    /**
+     * @param array<string, mixed> $cols
+     * @return array<string, string|null>
+     */
+    private function pgFormatCols(array $cols): array
+    {
+        $formatted = [];
+
+        foreach ($cols as $key => $value) {
+            $formatted[$key] = $this->formatSql($value);
+        }
+
+        return $formatted;
+    }
+
     private function formatSql($value): string
     {
         if ($value instanceof \DateTimeInterface) {
@@ -30,6 +45,10 @@ trait PgFormatterTrait
 
         if ($value === null) {
             return 'null';
+        }
+
+        if (is_bool($value)) {
+            return $value ? 'true' : 'false';
         }
 
         return (string)$value;
