@@ -53,7 +53,7 @@ class AuraSqlDataCollector extends DataCollector
      *
      * @api
      */
-    public function getName()
+    public function getName(): string
     {
         return "aura";
     }
